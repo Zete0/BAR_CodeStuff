@@ -63,6 +63,7 @@ function widget:Initialize()
         	'dps'..columnSeparator..
         	'weaponrange'..columnSeparator..
         	'reload time'..columnSeparator..
+            'Burst'..columnSeparator..
         	'specials'..columnSeparator..
        		'weapons'..columnSeparator..
         'buildoptions'..columnSeparator..
@@ -196,22 +197,74 @@ function widget:Initialize()
                 local dps = 0
                 local weaponTable = {}
                 local weapons = ''
-                local weaponRange = ''
-                --local weaponDamageAreaOfEffect = ''
-                --local weaponBurst = ''
-                --local weaponEnergyCost = ''
+                local damage = ''
                 local reloadTime = ''
-                --local weaponRange = ''
+                local weaponRange = ''
+                local areaOfEffect = ''
+                local burst = ''
+                local burstRate = ''
+                local edge = ''
+                local impulseBoost = ''
+                local impulseFactor = ''
+                local sprayAngle = ''
+                local weaponVelocity = ''
+                local energyPerShot = ''
+                local craterAreaOfEffect = ''
+                local craterBoost = ''
+                local craterMult = ''
                 if unitDef.weapons then
                     for wid, weapon in pairs(unitDef.weapons) do
                         if not string.find(WeaponDefs[weapon.weaponDef].name, 'bogus') and not string.find(WeaponDefs[weapon.weaponDef].name, 'mine') then
                             local weapName = WeaponDefs[weapon.weaponDef].type
+
+                            if reloadTime == '' or reloadTime < WeaponDefs[weapon.weaponDef].reload then
+                                reloadTime = WeaponDefs[weapon.weaponDef].reload
+			    			end
                             if weaponRange == '' or weaponRange < WeaponDefs[weapon.weaponDef].range then
                                 weaponRange = WeaponDefs[weapon.weaponDef].range
 			    			end
-			    			if reloadTime == '' or reloadTime < WeaponDefs[weapon.weaponDef].reload then
-                                reloadTime = WeaponDefs[weapon.weaponDef].reload
+                            if areaOfEffect == '' or areaOfEffect < WeaponDefs[weapon.weaponDef].damageAreaOfEffect then
+                                areaOfEffect = WeaponDefs[weapon.weaponDef].reload
 			    			end
+                            
+                            if WeaponDefs[weapon.weaponDef].salvosize ~= 0 and (burst == '' or burst < WeaponDefs[weapon.weaponDef].salvoSize) then
+                                burst = WeaponDefs[weapon.weaponDef].salvoSize
+			    			end
+                            --[[ 
+                            if burstRate == '' or burstRate < WeaponDefs[weapon.weaponDef].salvoDelay then
+                                burstRate = WeaponDefs[weapon.weaponDef].salvoDelay
+			    			end
+                            if sprayAngle == '' or sprayAngle < WeaponDefs[weapon.weaponDef].sprayAngle then
+                                sprayAngle = WeaponDefs[weapon.weaponDef].sprayAngle
+			    			end
+                 
+                            if edge == '' or edge < WeaponDefs[weapon.weaponDef].edgeEffectiveness then
+                                edge = WeaponDefs[weapon.weaponDef].edgeEffectiveness
+			    			end
+                            if impulseBoost == '' or impulseBoost < WeaponDefs[weapon.weaponDef].impulseBoost then
+                                impulseBoost = WeaponDefs[weapon.weaponDef].impulseBoost
+			    			end
+                            if impulseFactor == '' or impulseFactor < WeaponDefs[weapon.weaponDef].impulseFactor then
+                                impulseFactor = WeaponDefs[weapon.weaponDef].impulseFactor
+			    			end
+                            
+                            if weaponVelocity == '' or weaponVelocity < WeaponDefs[weapon.weaponDef].projectilespeed then
+                                weaponVelocity = WeaponDefs[weapon.weaponDef].projectilespeed
+			    			end
+                            if energyPerShot == '' or energyPerShot < WeaponDefs[weapon.weaponDef].energycost then
+                                energyPerShot = WeaponDefs[weapon.weaponDef].energycost
+			    			end
+                            
+                            if craterAreaOfEffect == '' or craterAreaOfEffect < WeaponDefs[weapon.weaponDef].craterAreaOfEffect then
+                                craterAreaOfEffect = WeaponDefs[weapon.weaponDef].craterAreaOfEffect
+			    			end
+                            if craterBoost == '' or craterBoost < WeaponDefs[weapon.weaponDef].craterBoost then
+                                craterBoost = WeaponDefs[weapon.weaponDef].craterBoost
+			    			end
+                            if craterMult == '' or craterMult < WeaponDefs[weapon.weaponDef].craterMult then
+                                craterMult = WeaponDefs[weapon.weaponDef].craterMult
+			    			end
+]]
                 			if WeaponDefs[weapon.weaponDef].paralyzer then
                 				if weapName == 'BeamLaser' then
 	                    			weapName = 'EMP-BeamLaser'
@@ -338,6 +391,7 @@ function widget:Initialize()
                     dps..columnSeparator..
                     weaponRange..columnSeparator..
                     reloadTime..columnSeparator..
+                    burst..columnSeparator..
                     specials..columnSeparator..
                     weapons..columnSeparator..
                     buildoptions..columnSeparator..

@@ -11,7 +11,7 @@ function widget:GetInfo()
 end
 
 
-local filename = "unitlist.csv"
+local filename = "unitlist_z.csv"
 local iconTypes = VFS.Include("gamedata/icontypes.lua")
 
 
@@ -311,12 +311,11 @@ function widget:Initialize()
                     unitDef.health..columnSeparator..
                     unitDef.mass..columnSeparator..
                     round(unitDef.speed, 1)..columnSeparator..
-                    unitDef.turnrate..columnSeparator..
-                    unitDef.turninplaceanglelimit..columnSeparator..
-                    unitDef.turninplacespeedlimit..columnSeparator..
-                    unitDef.maxacc..columnSeparator..
-                    unitDef.maxdec..columnSeparator..
-                    unitDef.maxrudder..columnSeparator..
+                    round(unitDef.turnrate, 1)..columnSeparator..
+                    round(unitDef.turninplacespeedlimit, 3)..columnSeparator..
+                    round(unitDef.maxacc, 3)..columnSeparator..
+                    round(unitDef.maxdec, 3)..columnSeparator..
+                    round(unitDef.maxrudder, 3)..columnSeparator..
                     ((unitDef.modCategories["phib"] ~= nil or (unitDef.modCategories["canbeuw"] ~= nil and unitDef.modCategories["underwater"] == nil)) and '1' or '')..columnSeparator..
                     ((unitDef.modCategories["underwater"] ~= nil) and '1' or '')..columnSeparator..
                     (unitDef.canFly and '1' or '')..columnSeparator..
@@ -336,7 +335,7 @@ function widget:Initialize()
                     weapons..columnSeparator..
                     buildoptions..columnSeparator..
                     (allBuildableDefs[udid] and '1' or '0')..columnSeparator..
-					(unitDef.customParams.subfolder and unitDef.customParams.subfolder..'/' or "") .. unitDef.name..'.lua'..
+		    (unitDef.customParams.subfolder and unitDef.customParams.subfolder..'/' or "") .. unitDef.name..'.lua'..
                     '\n'
                 )
             end

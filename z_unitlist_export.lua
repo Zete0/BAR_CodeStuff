@@ -34,9 +34,9 @@ function widget:Initialize()
         'name'..columnSeparator..
         'tooltip'..columnSeparator..
         'description'..columnSeparator..
-	'metalcost'..columnSeparator..
-	'energycost'..columnSeparator..
-	'buildtime'..columnSeparator..
+		'metalcost'..columnSeparator..
+		'energycost'..columnSeparator..
+		'buildtime'..columnSeparator..
         'metalmake'..columnSeparator..
         'energymake'..columnSeparator..
         'buildpower'..columnSeparator..
@@ -67,7 +67,7 @@ function widget:Initialize()
        		'weapons'..columnSeparator..
         'buildoptions'..columnSeparator..
         'buildable'..columnSeparator..
-	'file'..columnSeparator..
+		'file'..columnSeparator..
         '\n'
     )
 

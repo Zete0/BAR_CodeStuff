@@ -1,0 +1,84 @@
+	energycost
+	metalcost
+	buildtime
+	health
+	speed
+	radardistance
+	sightdistance
+	turnrate
+	mass
+	maxacc
+	maxdec
+	maxrudder
+
+areaofeffect		damageAreaOfEffect
+burst			      salvosize
+burst rate		  salvodelay
+edge			      edgeEffectiveness
+energypershot		energycost
+range			      range
+reloadtime		  reload
+damage			    damages?
+impulseboost		impulseBoost
+impulsefactor		impulseFactor
+sprayangle		  sprayAngle
+weaponvelocity	projectilespeed
+
+craterAreaOfEffect	craterAreaOfEffect
+craterBoost		      craterBoost
+craterMult		      craterMult
+
+*weapon name
+
+
+
+
+
+maxangledif		maxMainDirAngleDif?	maxFireAngle?
+
+
+
+
+
+
+
+        'id'..columnSeparator..
+        'faction'..columnSeparator..
+        'techlevel'..columnSeparator..
+        'name'..columnSeparator..
+        'tooltip'..columnSeparator..
+        'description'..columnSeparator..
+		'metalcost'..columnSeparator..
+		'energycost'..columnSeparator..
+		'buildtime'..columnSeparator..
+        'metalmake'..columnSeparator..
+        'energymake'..columnSeparator..
+        'buildpower'..columnSeparator..
+        'health'..columnSeparator..
+        'mass'..columnSeparator..
+        'speed'..columnSeparator..
+        'turnrate'..columnSeparator..
+        'maxacc'..columnSeparator..
+        'maxdec'..columnSeparator..
+        'maxrudder'..columnSeparator..
+		'jammerrange'..columnSeparator..
+		'sonarrange'..columnSeparator..
+		'radarrange'..columnSeparator..
+   		'sightrange'..columnSeparator..
+		'airsightrange'..columnSeparator..
+        'amphib'..columnSeparator..
+        'sub'..columnSeparator..
+        'air'..columnSeparator..
+        'hover'..columnSeparator..
+        'ship'..columnSeparator..
+        'tank'..columnSeparator..
+        'bot'..columnSeparator..
+        'building'..columnSeparator..
+        	'dps'..columnSeparator..
+        	'weaponrange'..columnSeparator..
+        	'reload time'..columnSeparator..
+        	'specials'..columnSeparator..
+       		'weapons'..columnSeparator..
+        'buildoptions'..columnSeparator..
+        'buildable'..columnSeparator..
+	'file'..columnSeparator..

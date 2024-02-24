@@ -208,10 +208,10 @@ function widget:Initialize()
                             local weapName = WeaponDefs[weapon.weaponDef].type
                             if weaponRange == '' or weaponRange < WeaponDefs[weapon.weaponDef].range then
                                 weaponRange = WeaponDefs[weapon.weaponDef].range
-			    end
-			    if reloadTime == '' or reloadTime < WeaponDefs[weapon.weaponDef].reload then
+			  				end
+			    			if reloadTime == '' or reloadTime < WeaponDefs[weapon.weaponDef].reload then
                                 reloadTime = WeaponDefs[weapon.weaponDef].reload
-			    end
+			    			end
                             if WeaponDefs[weapon.weaponDef].paralyzer then
                                 if weapName == 'BeamLaser' then
                                     weapName = 'EMP-BeamLaser'

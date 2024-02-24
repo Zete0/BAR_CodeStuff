@@ -44,7 +44,6 @@ function widget:Initialize()
         'mass'..columnSeparator..
         'speed'..columnSeparator..
         'turnrate'..columnSeparator..
-        'turninplaceanglelimit'..columnSeparator..
         'turninplacespeedlimit'..columnSeparator..
         'maxacc'..columnSeparator..
         'maxdec'..columnSeparator..
@@ -311,11 +310,12 @@ function widget:Initialize()
                     unitDef.health..columnSeparator..
                     unitDef.mass..columnSeparator..
                     round(unitDef.speed, 1)..columnSeparator..
-                    round(unitDef.turnrate, 1)..columnSeparator..
-                    round(unitDef.turninplacespeedlimit, 3)..columnSeparator..
-                    round(unitDef.maxacc, 3)..columnSeparator..
-                    round(unitDef.maxdec, 3)..columnSeparator..
-                    round(unitDef.maxrudder, 3)..columnSeparator..
+                    round(unitDef.turnRate, 1)..columnSeparator..
+                    round(unitDef.turnInPlaceAngleLimit, 3)..columnSeparator..
+                    round(unitDef.turnInPlaceSpeedLimit, 3)..columnSeparator..
+                    round(unitDef.maxAcc, 3)..columnSeparator..
+                    round(unitDef.maxDec, 3)..columnSeparator..
+                    round(unitDef.maxRudder, 3)..columnSeparator..
                     ((unitDef.modCategories["phib"] ~= nil or (unitDef.modCategories["canbeuw"] ~= nil and unitDef.modCategories["underwater"] == nil)) and '1' or '')..columnSeparator..
                     ((unitDef.modCategories["underwater"] ~= nil) and '1' or '')..columnSeparator..
                     (unitDef.canFly and '1' or '')..columnSeparator..

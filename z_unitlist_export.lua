@@ -34,16 +34,26 @@ function widget:Initialize()
         'name'..columnSeparator..
         'tooltip'..columnSeparator..
         'description'..columnSeparator..
-        'radaricon'..columnSeparator..
-        'height'..columnSeparator..
-        'metalcost'..columnSeparator..
-		'energycost'..columnSeparator..
-		'buildtime'..columnSeparator..
+	'metalcost'..columnSeparator..
+	'energycost'..columnSeparator..
+	'buildtime'..columnSeparator..
         'metalmake'..columnSeparator..
         'energymake'..columnSeparator..
         'buildpower'..columnSeparator..
-        'speed'..columnSeparator..
         'health'..columnSeparator..
+        'mass'..columnSeparator..
+        'speed'..columnSeparator..
+        'turnrate'..columnSeparator..
+        'turninplaceanglelimit'..columnSeparator..
+        'turninplacespeedlimit'..columnSeparator..
+        'maxacc'..columnSeparator..
+        'maxdec'..columnSeparator..
+        'maxrudder'..columnSeparator..
+	'jammerrange'..columnSeparator..
+	'sonarrange'..columnSeparator..
+	'radarrange'..columnSeparator..
+        'sightrange'..columnSeparator..
+	'airsightrange'..columnSeparator..
         'amphib'..columnSeparator..
         'sub'..columnSeparator..
         'air'..columnSeparator..
@@ -52,18 +62,13 @@ function widget:Initialize()
         'tank'..columnSeparator..
         'bot'..columnSeparator..
         'building'..columnSeparator..
-        'dps'..columnSeparator..
-        'weaponrange'..columnSeparator..
-        'jammerrange'..columnSeparator..
-        'sonarrange'..columnSeparator..
-        'radarrange'..columnSeparator..
-        'sightrange'..columnSeparator..
-        'airsightrange'..columnSeparator..
-        'specials'..columnSeparator..
-        'weapons'..columnSeparator..
+        	'dps'..columnSeparator..
+        	'weaponrange'..columnSeparator..
+        	'specials'..columnSeparator..
+       		'weapons'..columnSeparator..
         'buildoptions'..columnSeparator..
         'buildable'..columnSeparator..
-		'file'..columnSeparator..
+	'file'..columnSeparator..
         '\n'
     )
 
@@ -297,16 +302,21 @@ function widget:Initialize()
                     unitDef.translatedHumanName..columnSeparator..
                     unitDef.translatedTooltip..columnSeparator..
                     description..columnSeparator..
-                    (iconTypes[unitDef.iconType] and iconTypes[unitDef.iconType].bitmap and string.gsub(string.gsub(iconTypes[unitDef.iconType].bitmap, 'icons/', ''), '.png', '') or '')..columnSeparator..
-                    round(unitDef.height, 0)..columnSeparator..
                     unitDef.metalCost..columnSeparator..
-					unitDef.energyCost..columnSeparator..
-					unitDef.buildTime..columnSeparator..
+		    unitDef.energyCost..columnSeparator..
+		    unitDef.buildTime..columnSeparator..
                     metalMake..columnSeparator..
                     energyMake..columnSeparator..
                     unitDef.buildSpeed..columnSeparator..
-                    round(unitDef.speed, 0)..columnSeparator..
                     unitDef.health..columnSeparator..
+                    unitDef.mass..columnSeparator..
+                    round(unitDef.speed, 1)..columnSeparator..
+                    unitDef.turnrate..columnSeparator..
+                    unitDef.turninplaceanglelimit..columnSeparator..
+                    unitDef.turninplacespeedlimit..columnSeparator..
+                    unitDef.maxacc..columnSeparator..
+                    unitDef.maxdec..columnSeparator..
+                    unitDef.maxrudder..columnSeparator..
                     ((unitDef.modCategories["phib"] ~= nil or (unitDef.modCategories["canbeuw"] ~= nil and unitDef.modCategories["underwater"] == nil)) and '1' or '')..columnSeparator..
                     ((unitDef.modCategories["underwater"] ~= nil) and '1' or '')..columnSeparator..
                     (unitDef.canFly and '1' or '')..columnSeparator..

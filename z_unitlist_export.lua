@@ -44,7 +44,6 @@ function widget:Initialize()
         'mass'..columnSeparator..
         'speed'..columnSeparator..
         'turnrate'..columnSeparator..
-        'turninplacespeedlimit'..columnSeparator..
         'maxacc'..columnSeparator..
         'maxdec'..columnSeparator..
         'maxrudder'..columnSeparator..
@@ -63,6 +62,7 @@ function widget:Initialize()
         'building'..columnSeparator..
         	'dps'..columnSeparator..
         	'weaponrange'..columnSeparator..
+        	'ReloadTime'..columnSeparator..
         	'specials'..columnSeparator..
        		'weapons'..columnSeparator..
         'buildoptions'..columnSeparator..
@@ -197,12 +197,19 @@ function widget:Initialize()
                 local weaponTable = {}
                 local weapons = ''
                 local weaponRange = ''
+                --local weaponDamageAreaOfEffect = ''
+                --local weaponBurst = ''
+                --local weaponEnergyCost = ''
+                local ReloadTime = ''
+                --local weaponRange = ''
                 if unitDef.weapons then
                     for wid, weapon in pairs(unitDef.weapons) do
                         if not string.find(WeaponDefs[weapon.weaponDef].name, 'bogus') and not string.find(WeaponDefs[weapon.weaponDef].name, 'mine') then
                             local weapName = WeaponDefs[weapon.weaponDef].type
                             if weaponRange == '' or weaponRange < WeaponDefs[weapon.weaponDef].range then
                                 weaponRange = WeaponDefs[weapon.weaponDef].range
+                            if ReloadTime == '' or wReloadTime < WeaponDefs[weapon.weaponDef].ReloadTime then
+                                ReloadTime = WeaponDefs[weapon.weaponDef].ReloadTime
                             end
                             if WeaponDefs[weapon.weaponDef].paralyzer then
                                 if weapName == 'BeamLaser' then
@@ -311,8 +318,6 @@ function widget:Initialize()
                     unitDef.mass..columnSeparator..
                     round(unitDef.speed, 1)..columnSeparator..
                     round(unitDef.turnRate, 1)..columnSeparator..
-                    round(unitDef.turnInPlaceAngleLimit, 3)..columnSeparator..
-                    round(unitDef.turnInPlaceSpeedLimit, 3)..columnSeparator..
                     round(unitDef.maxAcc, 3)..columnSeparator..
                     round(unitDef.maxDec, 3)..columnSeparator..
                     round(unitDef.maxRudder, 3)..columnSeparator..
@@ -326,6 +331,7 @@ function widget:Initialize()
                     ((unitDef.isBuilding or unitDef.isFactory or unitDef.speed==0) and '1' or '')..columnSeparator..
                     dps..columnSeparator..
                     weaponRange..columnSeparator..
+                    weaponReloadTime..columnSeparator..
                     jammerRange..columnSeparator..
                     sonarRange..columnSeparator..
                     radarRange..columnSeparator..

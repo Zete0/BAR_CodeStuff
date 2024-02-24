@@ -2,8 +2,8 @@ function widget:GetInfo()
   return {
     name      = "Unit CSV Export",
     desc      = "export units (for the purpose of the website database)",
-    author    = "Floris",
-    date      = "May 2018",
+    author    = "Floris, edited by Zeteo",
+    date      = "May 2018, Feb 2024",
     license   = "GNU GPL, v2 or later",
     layer     = 0,
     enabled   = false --  loaded by default?
@@ -34,10 +34,11 @@ function widget:Initialize()
         'name'..columnSeparator..
         'tooltip'..columnSeparator..
         'description'..columnSeparator..
+        'radaricon'..columnSeparator..
         'height'..columnSeparator..
         'metalcost'..columnSeparator..
-	'energycost'..columnSeparator..
-	'buildtime'..columnSeparator..
+		'energycost'..columnSeparator..
+		'buildtime'..columnSeparator..
         'metalmake'..columnSeparator..
         'energymake'..columnSeparator..
         'buildpower'..columnSeparator..
@@ -51,15 +52,6 @@ function widget:Initialize()
         'tank'..columnSeparator..
         'bot'..columnSeparator..
         'building'..columnSeparator..
-
-	'turnrate'..columnSeperator..
-	'turninplaceanglelimit'..columnSeperator..
-	'turninplacespeedlimit'..columnSeperator..
-	'mass'..columnSeperator..
-	'maxacc'..columnSeperator..
-	'maxdec'..columnSeperator..
-	'maxrudder'..columnSeperator..
-		
         'dps'..columnSeparator..
         'weaponrange'..columnSeparator..
         'jammerrange'..columnSeparator..
@@ -145,7 +137,7 @@ function widget:Initialize()
                 if unitDef.sonarStealth then
                     specials = specials .. 'sonar-stealth, '
                 end
-                if unitDef.radarDistance >= 200 then
+                if unitDef.radarDistance >= 1000 then
                     specials = specials .. 'radar, '
                 end
                 if unitDef.radarDistanceJam > 0  then

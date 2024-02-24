@@ -61,9 +61,10 @@ function widget:Initialize()
         'bot'..columnSeparator..
         'building'..columnSeparator..
         	'dps'..columnSeparator..
-        	'weaponrange'..columnSeparator..
-        	'reload time'..columnSeparator..
+        	'Range'..columnSeparator..
+        	'Reload Time'..columnSeparator..
             'Burst'..columnSeparator..
+		    'Burst Rate'..columnSeparator..
         	'specials'..columnSeparator..
        		'weapons'..columnSeparator..
         'buildoptions'..columnSeparator..
@@ -203,15 +204,15 @@ function widget:Initialize()
                 local areaOfEffect = ''
                 local burst = ''
                 local burstRate = ''
-                local edge = ''
+                local edgeEffectiveness = ''
                 local impulseBoost = ''
                 local impulseFactor = ''
-                local sprayAngle = ''
-                local weaponVelocity = ''
-                local energyPerShot = ''
-                local craterAreaOfEffect = ''
-                local craterBoost = ''
-                local craterMult = ''
+                local sprayAngle = 0
+                local weaponVelocity = 0
+                local energyPerShot = 0
+                local craterAreaOfEffect = 0
+                local craterBoost = 0
+                local craterMult = 0
                 if unitDef.weapons then
                     for wid, weapon in pairs(unitDef.weapons) do
                         if not string.find(WeaponDefs[weapon.weaponDef].name, 'bogus') and not string.find(WeaponDefs[weapon.weaponDef].name, 'mine') then
@@ -227,34 +228,35 @@ function widget:Initialize()
                                 areaOfEffect = WeaponDefs[weapon.weaponDef].reload
 			    			end
                             
-                            if WeaponDefs[weapon.weaponDef].salvosize ~= 0 and (burst == '' or burst < WeaponDefs[weapon.weaponDef].salvoSize) then
+                            if WeaponDefs[weapon.weaponDef].salvoSize ~= 0 and (burst == '' or burst < WeaponDefs[weapon.weaponDef].salvoSize) then
                                 burst = WeaponDefs[weapon.weaponDef].salvoSize
 			    			end
-                            --[[ 
-                            if burstRate == '' or burstRate < WeaponDefs[weapon.weaponDef].salvoDelay then
+							if WeaponDefs[weapon.weaponDef].salvoDelay ~= 0 and (burstRate == '' or burstRate < WeaponDefs[weapon.weaponDef].salvoDelay) then
                                 burstRate = WeaponDefs[weapon.weaponDef].salvoDelay
 			    			end
-                            if sprayAngle == '' or sprayAngle < WeaponDefs[weapon.weaponDef].sprayAngle then
+							if WeaponDefs[weapon.weaponDef].sprayAngle ~= 0 and (sprayAngle == 0 or sprayAngle < WeaponDefs[weapon.weaponDef].sprayAngle) then
                                 sprayAngle = WeaponDefs[weapon.weaponDef].sprayAngle
 			    			end
-                 
-                            if edge == '' or edge < WeaponDefs[weapon.weaponDef].edgeEffectiveness then
-                                edge = WeaponDefs[weapon.weaponDef].edgeEffectiveness
+
+							if WeaponDefs[weapon.weaponDef].edgeEffectiveness ~= 0 and (edgeEffectiveness == '' or edgeEffectiveness < WeaponDefs[weapon.weaponDef].edgeEffectiveness) then
+                                edgeEffectiveness = WeaponDefs[weapon.weaponDef].edgeEffectiveness
 			    			end
-                            if impulseBoost == '' or impulseBoost < WeaponDefs[weapon.weaponDef].impulseBoost then
-                                impulseBoost = WeaponDefs[weapon.weaponDef].impulseBoost
+--[[ 
+							if WeaponDefs[weapon.weaponDef].impulseboost ~= 0 and (impulseBoost == '' or impulseBoost < WeaponDefs[weapon.weaponDef].impulseboost) then
+                                impulseBoost = WeaponDefs[weapon.weaponDef].impulseboost
 			    			end
-                            if impulseFactor == '' or impulseFactor < WeaponDefs[weapon.weaponDef].impulseFactor then
-                                impulseFactor = WeaponDefs[weapon.weaponDef].impulseFactor
+							if WeaponDefs[weapon.weaponDef].impulsefactor ~= 0 and (impulseFactor == '' or impulseFactor < WeaponDefs[weapon.weaponDef].impulsefactor) then
+                                impulseFactor = WeaponDefs[weapon.weaponDef].impulsefactor
 			    			end
-                            
-                            if weaponVelocity == '' or weaponVelocity < WeaponDefs[weapon.weaponDef].projectilespeed then
+]]
+--[[ 
+                            if weaponVelocity == 0 or weaponVelocity < WeaponDefs[weapon.weaponDef].projectilespeed then
                                 weaponVelocity = WeaponDefs[weapon.weaponDef].projectilespeed
 			    			end
-                            if energyPerShot == '' or energyPerShot < WeaponDefs[weapon.weaponDef].energycost then
-                                energyPerShot = WeaponDefs[weapon.weaponDef].energycost
+                            if energyPerShot == 0 or energyPerShot < WeaponDefs[weapon.weaponDef].energyCost then
+                                energyPerShot = WeaponDefs[weapon.weaponDef].energyCost
 			    			end
-                            
+
                             if craterAreaOfEffect == '' or craterAreaOfEffect < WeaponDefs[weapon.weaponDef].craterAreaOfEffect then
                                 craterAreaOfEffect = WeaponDefs[weapon.weaponDef].craterAreaOfEffect
 			    			end
@@ -392,6 +394,7 @@ function widget:Initialize()
                     weaponRange..columnSeparator..
                     reloadTime..columnSeparator..
                     burst..columnSeparator..
+					burstRate..columnSeparator..
                     specials..columnSeparator..
                     weapons..columnSeparator..
                     buildoptions..columnSeparator..

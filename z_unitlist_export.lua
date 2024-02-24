@@ -34,9 +34,9 @@ function widget:Initialize()
         'name'..columnSeparator..
         'tooltip'..columnSeparator..
         'description'..columnSeparator..
-		'metalcost'..columnSeparator..
-		'energycost'..columnSeparator..
-		'buildtime'..columnSeparator..
+	'metalcost'..columnSeparator..
+	'energycost'..columnSeparator..
+	'buildtime'..columnSeparator..
         'metalmake'..columnSeparator..
         'energymake'..columnSeparator..
         'buildpower'..columnSeparator..
@@ -208,32 +208,32 @@ function widget:Initialize()
                             local weapName = WeaponDefs[weapon.weaponDef].type
                             if weaponRange == '' or weaponRange < WeaponDefs[weapon.weaponDef].range then
                                 weaponRange = WeaponDefs[weapon.weaponDef].range
-			  				end
+			    			end
 			    			if reloadTime == '' or reloadTime < WeaponDefs[weapon.weaponDef].reload then
                                 reloadTime = WeaponDefs[weapon.weaponDef].reload
 			    			end
-                            if WeaponDefs[weapon.weaponDef].paralyzer then
-                                if weapName == 'BeamLaser' then
-                                    weapName = 'EMP-BeamLaser'
-                                elseif weapName == 'AircraftBomb' then
-                                    weapName = 'EMP-AircraftBomb'
-                                elseif weapName == 'StarburstLauncher' then
-                                    weapName = 'EMP-StarburstLauncher'
-                                end
+                			if WeaponDefs[weapon.weaponDef].paralyzer then
+                				if weapName == 'BeamLaser' then
+	                    			weapName = 'EMP-BeamLaser'
+                    			elseif weapName == 'AircraftBomb' then
+                    				weapName = 'EMP-AircraftBomb'
+                    			elseif weapName == 'StarburstLauncher' then
+                        			weapName = 'EMP-StarburstLauncher'
+                    			end
                             else
-								if WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]] > WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0] then
-								    dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
-                                else
-                                    dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
-                                end
-                            end
-                            if weaponTable[weapName] then
-                                weaponTable[weapName] = weaponTable[weapName] + 1
+							if WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]] > WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0] then
+								dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
                             else
-                                weaponTable[weapName] = 1
+	                            dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
                             end
                         end
+                        if weaponTable[weapName] then
+                            weaponTable[weapName] = weaponTable[weapName] + 1
+                        else
+                            weaponTable[weapName] = 1
+                        end
                     end
+                end
                     for wname, wnum in pairs(weaponTable) do
                         local separator = columnSubSeparator
                         if weapons == '' then

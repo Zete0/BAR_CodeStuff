@@ -249,7 +249,7 @@ function widget:Initialize()
                                 impulseFactor = WeaponDefs[weapon.weaponDef].impulsefactor
 			    			end
 ]]
---[[ 
+
                             if weaponVelocity == 0 or weaponVelocity < WeaponDefs[weapon.weaponDef].projectilespeed then
                                 weaponVelocity = WeaponDefs[weapon.weaponDef].projectilespeed
 			    			end
@@ -257,16 +257,7 @@ function widget:Initialize()
                                 energyPerShot = WeaponDefs[weapon.weaponDef].energyCost
 			    			end
 
-                            if craterAreaOfEffect == '' or craterAreaOfEffect < WeaponDefs[weapon.weaponDef].craterAreaOfEffect then
-                                craterAreaOfEffect = WeaponDefs[weapon.weaponDef].craterAreaOfEffect
-			    			end
-                            if craterBoost == '' or craterBoost < WeaponDefs[weapon.weaponDef].craterBoost then
-                                craterBoost = WeaponDefs[weapon.weaponDef].craterBoost
-			    			end
-                            if craterMult == '' or craterMult < WeaponDefs[weapon.weaponDef].craterMult then
-                                craterMult = WeaponDefs[weapon.weaponDef].craterMult
-			    			end
-]]
+
                 			if WeaponDefs[weapon.weaponDef].paralyzer then
                 				if weapName == 'BeamLaser' then
 	                    			weapName = 'EMP-BeamLaser'

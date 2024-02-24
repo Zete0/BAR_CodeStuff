@@ -34,9 +34,9 @@ function widget:Initialize()
         'name'..columnSeparator..
         'tooltip'..columnSeparator..
         'description'..columnSeparator..
-	'metalcost'..columnSeparator..
-	'energycost'..columnSeparator..
-	'buildtime'..columnSeparator..
+		'metalcost'..columnSeparator..
+		'energycost'..columnSeparator..
+		'buildtime'..columnSeparator..
         'metalmake'..columnSeparator..
         'energymake'..columnSeparator..
         'buildpower'..columnSeparator..
@@ -47,11 +47,11 @@ function widget:Initialize()
         'maxacc'..columnSeparator..
         'maxdec'..columnSeparator..
         'maxrudder'..columnSeparator..
-	'jammerrange'..columnSeparator..
-	'sonarrange'..columnSeparator..
-	'radarrange'..columnSeparator..
-        'sightrange'..columnSeparator..
-	'airsightrange'..columnSeparator..
+		'jammerrange'..columnSeparator..
+		'sonarrange'..columnSeparator..
+		'radarrange'..columnSeparator..
+   		'sightrange'..columnSeparator..
+		'airsightrange'..columnSeparator..
         'amphib'..columnSeparator..
         'sub'..columnSeparator..
         'air'..columnSeparator..
@@ -62,7 +62,7 @@ function widget:Initialize()
         'building'..columnSeparator..
         	'dps'..columnSeparator..
         	'weaponrange'..columnSeparator..
-        	'ReloadTime'..columnSeparator..
+        	'reload time'..columnSeparator..
         	'specials'..columnSeparator..
        		'weapons'..columnSeparator..
         'buildoptions'..columnSeparator..
@@ -200,7 +200,7 @@ function widget:Initialize()
                 --local weaponDamageAreaOfEffect = ''
                 --local weaponBurst = ''
                 --local weaponEnergyCost = ''
-                local ReloadTime = ''
+                local reloadTime = ''
                 --local weaponRange = ''
                 if unitDef.weapons then
                     for wid, weapon in pairs(unitDef.weapons) do
@@ -208,9 +208,10 @@ function widget:Initialize()
                             local weapName = WeaponDefs[weapon.weaponDef].type
                             if weaponRange == '' or weaponRange < WeaponDefs[weapon.weaponDef].range then
                                 weaponRange = WeaponDefs[weapon.weaponDef].range
-                            if ReloadTime == '' or wReloadTime < WeaponDefs[weapon.weaponDef].ReloadTime then
-                                ReloadTime = WeaponDefs[weapon.weaponDef].ReloadTime
-                            end
+			    end
+			    if reloadTime == '' or reloadTime < WeaponDefs[weapon.weaponDef].reload then
+                                reloadTime = WeaponDefs[weapon.weaponDef].reload
+			    end
                             if WeaponDefs[weapon.weaponDef].paralyzer then
                                 if weapName == 'BeamLaser' then
                                     weapName = 'EMP-BeamLaser'
@@ -221,7 +222,7 @@ function widget:Initialize()
                                 end
                             else
 								if WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]] > WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0] then
-									dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
+								    dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
                                 else
                                     dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
                                 end
@@ -309,8 +310,8 @@ function widget:Initialize()
                     unitDef.translatedTooltip..columnSeparator..
                     description..columnSeparator..
                     unitDef.metalCost..columnSeparator..
-		    unitDef.energyCost..columnSeparator..
-		    unitDef.buildTime..columnSeparator..
+		    		unitDef.energyCost..columnSeparator..
+		    		unitDef.buildTime..columnSeparator..
                     metalMake..columnSeparator..
                     energyMake..columnSeparator..
                     unitDef.buildSpeed..columnSeparator..
@@ -321,6 +322,11 @@ function widget:Initialize()
                     round(unitDef.maxAcc, 3)..columnSeparator..
                     round(unitDef.maxDec, 3)..columnSeparator..
                     round(unitDef.maxRudder, 3)..columnSeparator..
+					jammerRange..columnSeparator..
+                    sonarRange..columnSeparator..
+                    radarRange..columnSeparator..
+                    sightRange..columnSeparator..
+                    airsightRange..columnSeparator..
                     ((unitDef.modCategories["phib"] ~= nil or (unitDef.modCategories["canbeuw"] ~= nil and unitDef.modCategories["underwater"] == nil)) and '1' or '')..columnSeparator..
                     ((unitDef.modCategories["underwater"] ~= nil) and '1' or '')..columnSeparator..
                     (unitDef.canFly and '1' or '')..columnSeparator..
@@ -331,12 +337,7 @@ function widget:Initialize()
                     ((unitDef.isBuilding or unitDef.isFactory or unitDef.speed==0) and '1' or '')..columnSeparator..
                     dps..columnSeparator..
                     weaponRange..columnSeparator..
-                    weaponReloadTime..columnSeparator..
-                    jammerRange..columnSeparator..
-                    sonarRange..columnSeparator..
-                    radarRange..columnSeparator..
-                    sightRange..columnSeparator..
-                    airsightRange..columnSeparator..
+                    reloadTime..columnSeparator..
                     specials..columnSeparator..
                     weapons..columnSeparator..
                     buildoptions..columnSeparator..

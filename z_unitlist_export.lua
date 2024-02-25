@@ -29,12 +29,13 @@ function widget:Initialize()
     local columnSubSeparator = ', '
     -- see https://springrts.com/wiki/Lua_UnitDefs for what is availible
     file:write(
-        'id'..columnSeparator..
+        'name'..columnSeparator..
+		'id'..columnSeparator..
         'faction'..columnSeparator..
         'techlevel'..columnSeparator..
-        'name'..columnSeparator..
         'tooltip'..columnSeparator..
         'description'..columnSeparator..
+		'specials'..columnSeparator..
 		'metalcost'..columnSeparator..
 		'energycost'..columnSeparator..
 		'buildtime'..columnSeparator..
@@ -49,11 +50,11 @@ function widget:Initialize()
         'maxacc'..columnSeparator..
         'maxdec'..columnSeparator..
         'maxrudder'..columnSeparator..
-		'jammerrange'..columnSeparator..
-		'sonarrange'..columnSeparator..
 		'radardistance'..columnSeparator..
    		'sightdistance'..columnSeparator..
 		'airsightrange'..columnSeparator..
+		'jammerrange'..columnSeparator..
+		'sonarrange'..columnSeparator..
 		'weaponName'..columnSeparator..
         	'dps'..columnSeparator..
 			'damage'..columnSeparator..
@@ -66,16 +67,15 @@ function widget:Initialize()
 			'sprayangle'..columnSeparator..
 			'weaponvelocity'..columnSeparator..
 			'energypershot'..columnSeparator..
-		'amphib'..columnSeparator..
-        'sub'..columnSeparator..
-        'air'..columnSeparator..
-        'hover'..columnSeparator..
-        'ship'..columnSeparator..
-        'tank'..columnSeparator..
         'bot'..columnSeparator..
+		'tank'..columnSeparator..
+		'air'..columnSeparator..
+		'ship'..columnSeparator..
+		'hover'..columnSeparator..
+		'amphib'..columnSeparator..
+		'sub'..columnSeparator..
         'building'..columnSeparator..
         'buildable'..columnSeparator..
-		'specials'..columnSeparator..
        	'weapons'..columnSeparator..
 		'file'..columnSeparator..
         '\n'
@@ -356,12 +356,13 @@ function widget:Initialize()
                 end
 
                 file:write(
-                    unitDef.name..columnSeparator..
+                    unitDef.translatedHumanName..columnSeparator..
+					unitDef.name..columnSeparator..
                     faction..columnSeparator..
                     techlevel..columnSeparator..
-                    unitDef.translatedHumanName..columnSeparator..
                     unitDef.translatedTooltip..columnSeparator..
                     description..columnSeparator..
+					specials..columnSeparator..
                     unitDef.metalCost..columnSeparator..
 		    		unitDef.energyCost..columnSeparator..
 		    		unitDef.buildTime..columnSeparator..
@@ -376,11 +377,11 @@ function widget:Initialize()
                     unitDef.maxAcc..columnSeparator..
                     unitDef.maxDec..columnSeparator..
                     unitDef.maxRudder..columnSeparator..
-					jammerRange..columnSeparator..
-                    sonarRange..columnSeparator..
                     radarRange..columnSeparator..
                     sightRange..columnSeparator..
                     airsightRange..columnSeparator..
+					jammerRange..columnSeparator..
+                    sonarRange..columnSeparator..
 					weaponName..columnSeparator..
 					dps..columnSeparator..
 					damage..columnSeparator..
@@ -393,16 +394,16 @@ function widget:Initialize()
 					sprayAngle..columnSeparator..
 					weaponVelocity..columnSeparator..
 					energyPerShot..columnSeparator..
-                    ((unitDef.modCategories["phib"] ~= nil or (unitDef.modCategories["canbeuw"] ~= nil and unitDef.modCategories["underwater"] == nil)) and '1' or '')..columnSeparator..
-                    ((unitDef.modCategories["underwater"] ~= nil) and '1' or '')..columnSeparator..
-                    (unitDef.canFly and '1' or '')..columnSeparator..
-                    (unitDef.modCategories["hover"] and '1' or '')..columnSeparator..
-                    (unitDef.modCategories["ship"] and '1' or '')..columnSeparator..
-                    (unitDef.modCategories["tank"] and '1' or '')..columnSeparator..
                     (unitDef.modCategories["bot"] and '1' or '')..columnSeparator..
+					(unitDef.modCategories["tank"] and '1' or '')..columnSeparator..
+					(unitDef.canFly and '1' or '')..columnSeparator..
+					(unitDef.modCategories["ship"] and '1' or '')..columnSeparator..
+					(unitDef.modCategories["hover"] and '1' or '')..columnSeparator..
+					((unitDef.modCategories["phib"] ~= nil or (unitDef.modCategories["canbeuw"] ~= nil and unitDef.modCategories["underwater"] == nil)) and '1' or '')..columnSeparator..
+					((unitDef.modCategories["underwater"] ~= nil) and '1' or '')..columnSeparator..
                     ((unitDef.isBuilding or unitDef.isFactory or unitDef.speed==0) and '1' or '')..columnSeparator..
                     (allBuildableDefs[udid] and '1' or '0')..columnSeparator..
-                    specials..columnSeparator..
+                    
                     weapons..columnSeparator..
 		    		(unitDef.customParams.subfolder and unitDef.customParams.subfolder..'/' or "") .. unitDef.name..'.lua'..
                     '\n'

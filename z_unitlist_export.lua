@@ -17,7 +17,7 @@ local iconTypes = VFS.Include("gamedata/icontypes.lua")
 
 local function round(num, numDecimalPlaces)
     local mult = 10^(numDecimalPlaces or 0)
-    --if num >= 0 then return math.floor(num * mult + 0.5) / mult
+    --if num >= 0 then return math.floor(num * mult + 0.5) / mult		-- for some reason this doesn't work anymore O.o
     --else return math.ceil(num * mult - 0.5) / mult end
 	return num
 end
@@ -51,19 +51,21 @@ function widget:Initialize()
         'maxrudder'..columnSeparator..
 		'jammerrange'..columnSeparator..
 		'sonarrange'..columnSeparator..
-		'radarrange'..columnSeparator..
-   		'sightrange'..columnSeparator..
+		'radardistance'..columnSeparator..
+   		'sightdistance'..columnSeparator..
 		'airsightrange'..columnSeparator..
+		'weaponName'..columnSeparator..
         	'dps'..columnSeparator..
-			'Reload Time'..columnSeparator..
-        	'Range'..columnSeparator..
-			'areaOfEffect'..columnSeparator..
-            'Burst'..columnSeparator..
-		    'Burst Rate'..columnSeparator..
-			'edgeEffectiveness'..columnSeparator..
-			'SprayAngle'..columnSeparator..
-			'weaponVelocity'..columnSeparator..
-			'energyPerShot'..columnSeparator..
+			'damage'..columnSeparator..
+			'reloadtime'..columnSeparator..
+        	'range'..columnSeparator..
+			'areaofeffect'..columnSeparator..
+            'burst'..columnSeparator..
+		    'burstrate'..columnSeparator..
+			'edgeeffectiveness'..columnSeparator..
+			'sprayangle'..columnSeparator..
+			'weaponvelocity'..columnSeparator..
+			'energypershot'..columnSeparator..
 		'amphib'..columnSeparator..
         'sub'..columnSeparator..
         'air'..columnSeparator..
@@ -204,6 +206,8 @@ function widget:Initialize()
                 local dps = 0
                 local weaponTable = {}
                 local weapons = ''
+				local weaponName = ''
+				local damage = 0
                 local reloadTime = ''
                 local range = ''
                 local areaOfEffect = ''
@@ -217,6 +221,7 @@ function widget:Initialize()
                     for wid, weapon in pairs(unitDef.weapons) do
                         if not string.find(WeaponDefs[weapon.weaponDef].name, 'bogus') and not string.find(WeaponDefs[weapon.weaponDef].name, 'mine') then
                             local weapName = WeaponDefs[weapon.weaponDef].type
+							weaponName = WeaponDefs[weapon.weaponDef].name
 
                             if reloadTime == '' or reloadTime < WeaponDefs[weapon.weaponDef].reload then
                                 reloadTime = WeaponDefs[weapon.weaponDef].reload
@@ -269,8 +274,10 @@ function widget:Initialize()
                             else
 							if WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]] > WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0] then
 								dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
+								damage = damage + (WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["vtol"]])
                             else
 	                            dps = dps + (((WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0]*(1/WeaponDefs[weapon.weaponDef].reload)) * WeaponDefs[weapon.weaponDef].salvoSize) * WeaponDefs[weapon.weaponDef].projectiles)
+								damage = damage + (WeaponDefs[weapon.weaponDef].damages[Game.armorTypes["default"] or 0])
                             end
                         end
                         if weaponTable[weapName] then
@@ -310,10 +317,10 @@ function widget:Initialize()
                     dps = 0
                 end
 
-                if weaponRange ~= '' then
-                    weaponRange = round(weaponRange, 0)
+                if range ~= '' then
+                    range = round(range, 0)
                 else
-                    weaponRange = 0
+                    range = 0
                 end
 
                 local metalMake = ''
@@ -374,7 +381,9 @@ function widget:Initialize()
                     radarRange..columnSeparator..
                     sightRange..columnSeparator..
                     airsightRange..columnSeparator..
+					weaponName..columnSeparator..
 					dps..columnSeparator..
+					damage..columnSeparator..
 					reloadTime..columnSeparator..
                     range..columnSeparator..
                     areaOfEffect..columnSeparator..

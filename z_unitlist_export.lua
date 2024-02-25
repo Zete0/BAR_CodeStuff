@@ -17,8 +17,9 @@ local iconTypes = VFS.Include("gamedata/icontypes.lua")
 
 local function round(num, numDecimalPlaces)
     local mult = 10^(numDecimalPlaces or 0)
-    if num >= 0 then return math.floor(num * mult + 0.5) / mult
-    else return math.ceil(num * mult - 0.5) / mult end
+    --if num >= 0 then return math.floor(num * mult + 0.5) / mult
+    --else return math.ceil(num * mult - 0.5) / mult end
+	return num
 end
 
 function widget:Initialize()
@@ -40,6 +41,7 @@ function widget:Initialize()
         'metalmake'..columnSeparator..
         'energymake'..columnSeparator..
         'buildpower'..columnSeparator..
+		'buildoptions'..columnSeparator..
         'health'..columnSeparator..
         'mass'..columnSeparator..
         'speed'..columnSeparator..
@@ -52,7 +54,17 @@ function widget:Initialize()
 		'radarrange'..columnSeparator..
    		'sightrange'..columnSeparator..
 		'airsightrange'..columnSeparator..
-        'amphib'..columnSeparator..
+        	'dps'..columnSeparator..
+			'Reload Time'..columnSeparator..
+        	'Range'..columnSeparator..
+			'areaOfEffect'..columnSeparator..
+            'Burst'..columnSeparator..
+		    'Burst Rate'..columnSeparator..
+			'edgeEffectiveness'..columnSeparator..
+			'SprayAngle'..columnSeparator..
+			'weaponVelocity'..columnSeparator..
+			'energyPerShot'..columnSeparator..
+		'amphib'..columnSeparator..
         'sub'..columnSeparator..
         'air'..columnSeparator..
         'hover'..columnSeparator..
@@ -60,15 +72,9 @@ function widget:Initialize()
         'tank'..columnSeparator..
         'bot'..columnSeparator..
         'building'..columnSeparator..
-        	'dps'..columnSeparator..
-        	'Range'..columnSeparator..
-        	'Reload Time'..columnSeparator..
-            'Burst'..columnSeparator..
-		    'Burst Rate'..columnSeparator..
-        	'specials'..columnSeparator..
-       		'weapons'..columnSeparator..
-        'buildoptions'..columnSeparator..
         'buildable'..columnSeparator..
+		'specials'..columnSeparator..
+       	'weapons'..columnSeparator..
 		'file'..columnSeparator..
         '\n'
     )
@@ -198,21 +204,15 @@ function widget:Initialize()
                 local dps = 0
                 local weaponTable = {}
                 local weapons = ''
-                local damage = ''
                 local reloadTime = ''
-                local weaponRange = ''
+                local range = ''
                 local areaOfEffect = ''
                 local burst = ''
                 local burstRate = ''
                 local edgeEffectiveness = ''
-                local impulseBoost = ''
-                local impulseFactor = ''
                 local sprayAngle = 0
                 local weaponVelocity = 0
                 local energyPerShot = 0
-                local craterAreaOfEffect = 0
-                local craterBoost = 0
-                local craterMult = 0
                 if unitDef.weapons then
                     for wid, weapon in pairs(unitDef.weapons) do
                         if not string.find(WeaponDefs[weapon.weaponDef].name, 'bogus') and not string.find(WeaponDefs[weapon.weaponDef].name, 'mine') then
@@ -221,11 +221,11 @@ function widget:Initialize()
                             if reloadTime == '' or reloadTime < WeaponDefs[weapon.weaponDef].reload then
                                 reloadTime = WeaponDefs[weapon.weaponDef].reload
 			    			end
-                            if weaponRange == '' or weaponRange < WeaponDefs[weapon.weaponDef].range then
-                                weaponRange = WeaponDefs[weapon.weaponDef].range
+                            if range == '' or range < WeaponDefs[weapon.weaponDef].range then
+                                range = WeaponDefs[weapon.weaponDef].range
 			    			end
                             if areaOfEffect == '' or areaOfEffect < WeaponDefs[weapon.weaponDef].damageAreaOfEffect then
-                                areaOfEffect = WeaponDefs[weapon.weaponDef].reload
+                                areaOfEffect = WeaponDefs[weapon.weaponDef].damageAreaOfEffect
 			    			end
                             
                             if WeaponDefs[weapon.weaponDef].salvoSize ~= 0 and (burst == '' or burst < WeaponDefs[weapon.weaponDef].salvoSize) then
@@ -361,18 +361,29 @@ function widget:Initialize()
                     metalMake..columnSeparator..
                     energyMake..columnSeparator..
                     unitDef.buildSpeed..columnSeparator..
+					buildoptions..columnSeparator..
                     unitDef.health..columnSeparator..
                     unitDef.mass..columnSeparator..
-                    round(unitDef.speed, 1)..columnSeparator..
-                    round(unitDef.turnRate, 1)..columnSeparator..
-                    round(unitDef.maxAcc, 3)..columnSeparator..
-                    round(unitDef.maxDec, 3)..columnSeparator..
-                    round(unitDef.maxRudder, 3)..columnSeparator..
+                    unitDef.speed..columnSeparator..
+                    unitDef.turnRate..columnSeparator..
+                    unitDef.maxAcc..columnSeparator..
+                    unitDef.maxDec..columnSeparator..
+                    unitDef.maxRudder..columnSeparator..
 					jammerRange..columnSeparator..
                     sonarRange..columnSeparator..
                     radarRange..columnSeparator..
                     sightRange..columnSeparator..
                     airsightRange..columnSeparator..
+					dps..columnSeparator..
+					reloadTime..columnSeparator..
+                    range..columnSeparator..
+                    areaOfEffect..columnSeparator..
+                    burst..columnSeparator..
+					burstRate..columnSeparator..
+					edgeEffectiveness..columnSeparator..
+					sprayAngle..columnSeparator..
+					weaponVelocity..columnSeparator..
+					energyPerShot..columnSeparator..
                     ((unitDef.modCategories["phib"] ~= nil or (unitDef.modCategories["canbeuw"] ~= nil and unitDef.modCategories["underwater"] == nil)) and '1' or '')..columnSeparator..
                     ((unitDef.modCategories["underwater"] ~= nil) and '1' or '')..columnSeparator..
                     (unitDef.canFly and '1' or '')..columnSeparator..
@@ -381,16 +392,10 @@ function widget:Initialize()
                     (unitDef.modCategories["tank"] and '1' or '')..columnSeparator..
                     (unitDef.modCategories["bot"] and '1' or '')..columnSeparator..
                     ((unitDef.isBuilding or unitDef.isFactory or unitDef.speed==0) and '1' or '')..columnSeparator..
-                    dps..columnSeparator..
-                    weaponRange..columnSeparator..
-                    reloadTime..columnSeparator..
-                    burst..columnSeparator..
-					burstRate..columnSeparator..
+                    (allBuildableDefs[udid] and '1' or '0')..columnSeparator..
                     specials..columnSeparator..
                     weapons..columnSeparator..
-                    buildoptions..columnSeparator..
-                    (allBuildableDefs[udid] and '1' or '0')..columnSeparator..
-		    (unitDef.customParams.subfolder and unitDef.customParams.subfolder..'/' or "") .. unitDef.name..'.lua'..
+		    		(unitDef.customParams.subfolder and unitDef.customParams.subfolder..'/' or "") .. unitDef.name..'.lua'..
                     '\n'
                 )
             end
